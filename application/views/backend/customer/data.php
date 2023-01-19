@@ -110,7 +110,7 @@
     <?php $totalcustomer = $this->db->get_where('customer', ['c_status' => 'Aktif'])->num_rows(); ?>
 
     <?php if ($totalcustomer >= 500) { ?>
-        <?php if ($this->session->userdata('role_id') == 1 or $menu['coverage_menu'] == 1) { ?>
+        <?php if ($this->session->userdata('role_id') == 1 or $this->session->userdata('role_id') == 3 or $menu['coverage_menu'] == 1) { ?>
 
 
             <div class="col-lg-12 col-sm-12 col-md-6">
