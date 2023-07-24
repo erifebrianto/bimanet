@@ -7,6 +7,7 @@ class Dashboard extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model(['income_m', 'expenditure_m', 'bill_m', 'logs_m', 'customer_m', 'package_m', 'help_m', 'coverage_m', 'services_m', 'mikrotik_m']);
+        $this->load->model('Payment_model');
     }
     private function _menu()
     {
@@ -79,6 +80,8 @@ class Dashboard extends CI_Controller
         $data['incomeNov'] = $this->income_m->getIncomeNov()->result();
         $data['incomeDec'] = $this->income_m->getIncomeDec()->result();
         $data['company'] = $this->db->get('company')->row_array();
+        $data['total_belum_bayar_bulan_ini'] = $this->Payment_model->unpaidThisMonth();
+        $data['total_belum_bayar_bulan_kemarin'] = $this->Payment_model->unpaidLastMonth();
         $this->template->load('backend', 'backend/dashboard', $data);
     }
     public function getcustomer()

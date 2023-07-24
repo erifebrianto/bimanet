@@ -179,13 +179,17 @@
                                 <div class="">
                                     <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: small">
                                         <a href="<?= site_url('bill/unpaid') ?>" style="text-decoration: none; color:black">
-                                            <span id="pendingpayment">xxx</span> Tagihan
+                                            <span id="pendingpayment">xxx</span> Total Tagihan
                                             <?php if ($this->session->userdata('role_id') == 1 or $role['show_saldo'] == 1) { ?>
                                                 (<span style="color:red;" id="amountpendingpayment">xxx</span>)
                                                 <br>
                                             <?php } ?>
                                         </a>
-
+                                        <div id="angka">
+                                        Bulan ini : (<span style="color:red;" >  <?php echo $total_belum_bayar_bulan_ini; ?> </span>)
+                                        <br>
+                                        Bulan Kemarin : (<span style="color:red;">  <?php echo $total_belum_bayar_bulan_kemarin; ?> </span>)
+                                            </div>
                                     </div>
                                 </div>
 
@@ -212,6 +216,7 @@
                                     <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Coverage Area</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $coverage; ?></div>
                                 </div>
+                                
                                 <div class="col-auto">
                                     <i class="fas fa-map fa-2x text-gray-300"></i>
                                 </div>
@@ -220,6 +225,7 @@
                     </a>
                 </div>
             </div>
+           
         <?php } ?>
         <?php if ($this->session->userdata('role_id') == 1 or $menu['help_menu'] == 1) { ?>
             <div class="col-xl-3 col-md-6 mb-4">
@@ -791,3 +797,16 @@ foreach ($incomeDec as $c => $data) {
         </script>
     <?php } ?>
 <?php } ?>
+<script>
+    // Ambil elemen dengan ID "angka"
+    const angkaElemen = document.getElementById("angka");
+
+    // Ambil nilai angka dari konten elemen
+    let angka = angkaElemen.innerHTML;
+
+    // Ubah angka menjadi format dengan koma sebagai pemisah ribuan
+    angka = angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    // Tampilkan angka yang telah diformat dengan koma
+    angkaElemen.innerHTML = angka;
+  </script>
